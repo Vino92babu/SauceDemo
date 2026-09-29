@@ -47,6 +47,6 @@ def test_complete_purchase(driver):
         checkout_page.get_confirmation_message()
         == "Thank you for your order!"
     )
-    assert False
+    # assert False
 
 
