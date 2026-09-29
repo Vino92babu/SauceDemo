@@ -4,12 +4,6 @@ pipeline {
 
     stages {
 
-        stage('Checkout') {
-            steps {
-                checkout scm
-            }
-        }
-
         stage('Install Dependencies') {
             steps {
                 bat 'python -m pip install --upgrade pip'
@@ -17,7 +11,7 @@ pipeline {
             }
         }
 
-        stage('Run Pytest') {
+        stage('Run Tests') {
             steps {
                 bat 'python -m pytest -v --html=reports/pytest-report.html --self-contained-html --alluredir=allure-results'
             }
@@ -42,6 +36,14 @@ pipeline {
                 jdk: '',
                 results: [[path: 'allure-results']]
             ])
+        }
+
+        success {
+            echo 'Automation tests completed successfully'
+        }
+
+        failure {
+            echo 'Automation tests failed'
         }
     }
 }
