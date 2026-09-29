@@ -1,0 +1,15 @@
+git -- version
+git config --global user.name "___"
+git config --global user.email "___"
+git config --list 
+cd D:\GIT\Class_Lavanya\SauceDemo
+git init
+git status
+git add . 
+git add test_login.py
+git comit -m adding git_text_file_created
+git remote add orgin " "
+git remote -v 
+git branch -m main
+git push -u orgin  main
+git push

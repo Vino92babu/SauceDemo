@@ -1,0 +1,38 @@
+pipeline {
+    agent any
+
+    stages {
+
+        stage('Checkout') {
+            steps {
+                checkout scm
+            }
+        }
+
+        stage('Install Dependencies') {
+            steps {
+                bat 'python -m pip install -r requirements.txt'
+            }
+        }
+
+        stage('Run Tests') {
+            steps {
+                bat 'python -m pytest -v -n 2 --html=reports/report.html --self-contained-html --alluredir=allure-results'
+            }
+        }
+    }
+
+    post {
+        always {
+            echo 'Automation execution completed'
+        }
+
+        success {
+            echo 'All tests passed'
+        }
+
+        failure {
+            echo 'Automation tests failed'
+        }
+    }
+}

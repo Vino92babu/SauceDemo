@@ -1,0 +1,4 @@
+[32mINFO    [0m TestLogger:test_logger.py:11 Test started
+[33mWARNING [0m TestLogger:test_logger.py:13 This is a warning
+[31m[1mERROR   [0m TestLogger:test_logger.py:15 This is an error
+[31mCRITICAL[0m TestLogger:test_logger.py:17 This is a critical message

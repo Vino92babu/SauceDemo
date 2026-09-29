@@ -1,0 +1,3 @@
+[32mINFO    [0m LoginPage:base_page.py:30 Entering text into: ('id', 'user-name')
+[32mINFO    [0m LoginPage:base_page.py:30 Entering text into: ('id', 'password')
+[32mINFO    [0m LoginPage:base_page.py:20 Clicking element: ('id', 'login-button')
