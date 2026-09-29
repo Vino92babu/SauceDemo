@@ -1,4 +1,5 @@
 pipeline {
+
     agent any
 
     stages {
@@ -11,28 +12,36 @@ pipeline {
 
         stage('Install Dependencies') {
             steps {
+                bat 'python -m pip install --upgrade pip'
                 bat 'python -m pip install -r requirements.txt'
             }
         }
 
-        stage('Run Tests') {
+        stage('Run Pytest') {
             steps {
-                bat 'python -m pytest -v -n 2 --html=reports/report.html --self-contained-html --alluredir=allure-results'
+                bat 'python -m pytest -v --html=reports/pytest-report.html --self-contained-html --alluredir=allure-results'
             }
         }
     }
 
     post {
+
         always {
-            echo 'Automation execution completed'
-        }
 
-        success {
-            echo 'All tests passed'
-        }
+            publishHTML([
+                allowMissing: true,
+                alwaysLinkToLastBuild: true,
+                keepAll: true,
+                reportDir: 'reports',
+                reportFiles: 'pytest-report.html',
+                reportName: 'Pytest HTML Report'
+            ])
 
-        failure {
-            echo 'Automation tests failed'
+            allure([
+                includeProperties: false,
+                jdk: '',
+                results: [[path: 'allure-results']]
+            ])
         }
     }
 }
